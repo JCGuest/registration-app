@@ -1,0 +1,10 @@
+<%= form_for @user do |f| %>
+<p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+    <%= f.submit %>
+</p>
+
+    <%= fields_for @user.adresses.build do |ff| %>
+
+    <%end %>
