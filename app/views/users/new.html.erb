@@ -1,10 +1,39 @@
-<%= form_for @user do |f| %>
-<p>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-    <%= f.submit %>
-</p>
+<%= form_for(@user) do |f| %>
+    
+        <%= f.label :email %>
+        <%= f.text_field :email %>
 
-    <%= fields_for @user.adresses.build do |ff| %>
 
-    <%end %>
+    <%= f.fields_for :addresses do |address_builder|  %>   
+    <fieldset>
+        <legend><%= address_builder.object.address_type %> Address</legend>
+        <p>
+            <%= address_builder.label :street_1  %>
+            <%= address_builder.text_field :street_1 %>
+        </p>
+        <p>
+            <%= address_builder.label :street_2  %>
+            <%= address_builder.text_field :street_2 %>
+        </p>
+        <%= address_builder.hidden_field :address_type  %>
+    </fieldset>
+        <%end %>
+
+     <%= f.fields_for :team do |team_builder|  %>   
+    <fieldset>
+        <legend>Team (Hometown required for new Teams)</legend>
+        <p>
+            <%= team_builder.label :name  %>
+            <%= team_builder.text_field :name %>
+        </p>
+        <p>
+            <%= team_builder.label :hometown  %>
+            <%= team_builder.text_field :hometown %>
+        </p>
+   
+    </fieldset>
+        <%end %>
+        
+<%= f.submit %>
+<%end %>
+
